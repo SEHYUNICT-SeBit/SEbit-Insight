@@ -20,7 +20,7 @@ NW_SERVICE_ACCOUNT_ID = ""
 
 # Production: Cloudflare Dashboard에서 ENVIRONMENT = "production" 으로 설정
 
-# LINE WORKS 인사정보 동기화 (매일 00:00 UTC = 09:00 KST)
+# 네이버 웍스 인사정보 동기화 (매일 00:00 UTC = 09:00 KST)
 # NW_PRIVATE_KEY는 시크릿으로 관리: wrangler secret put NW_PRIVATE_KEY
 [triggers]
 crons = ["0 0 * * *"]

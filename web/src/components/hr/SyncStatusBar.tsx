@@ -16,7 +16,7 @@ export function SyncStatusBar() {
       disabled={syncMutation.isPending}
     >
       <RefreshCw className={`h-4 w-4 mr-2 ${syncMutation.isPending ? 'animate-spin' : ''}`} />
-      {syncMutation.isPending ? '동기화 중...' : 'LINE WORKS 동기화'}
+      {syncMutation.isPending ? '동기화 중...' : '네이버 웍스 동기화'}
     </Button>
   );
 }

@@ -11,7 +11,7 @@ const route = new Hono<AppBindings>();
 
 /**
  * POST /api/admin/sync-employees
- * LINE WORKS 인사정보 동기화 (master 전용)
+ * 네이버 웍스 인사정보 동기화 (master 전용)
  */
 route.post('/sync-employees', requireRole('master'), async (c) => {
   try {

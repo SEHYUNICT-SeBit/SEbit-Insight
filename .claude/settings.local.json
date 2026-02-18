@@ -1,0 +1,22 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm install:*)",
+      "Bash(npx next build:*)",
+      "Bash(npx wrangler d1 migrations apply:*)",
+      "Bash(netstat:*)",
+      "Bash(findstr:*)",
+      "Bash(npx wrangler d1 execute:*)",
+      "Bash(taskkill:*)",
+      "Bash(npx wrangler dev:*)",
+      "WebFetch(domain:developers.worksmobile.com)",
+      "Bash(xargs:*)",
+      "Bash(python3:*)",
+      "WebFetch(domain:qiita.com)",
+      "WebFetch(domain:forum.worksmobile.com)",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:speakerdeck.com)",
+      "WebFetch(domain:docs.workato.com)"
+    ]
+  }
+}

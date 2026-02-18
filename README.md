@@ -10,14 +10,14 @@
 | Backend | Cloudflare Workers, Hono |
 | Database | Cloudflare D1 (SQLite) |
 | Auth | Cloudflare Access |
-| HR Sync | LINE WORKS (네이버 웍스) API |
+| HR Sync | 네이버 웍스 API |
 
 ## Features
 
 - **대시보드** - 전사현황, 부서성과, PM성과, 영업성과, 투입현황 5개 탭
 - **프로젝트 관리** - CRUD, 4단계 위저드 등록, 원가분석 시뮬레이션
 - **정산 관리** - 월별 매출/영업이익 정산
-- **인사 관리** - LINE WORKS 구성원 자동 동기화
+- **인사 관리** - 네이버 웍스 구성원 자동 동기화
 - **설정** - 부서, 단가표, 거래처 관리
 
 ## Directory Structure
@@ -89,7 +89,7 @@ cd web && npm run dev -- --port 3100
 - Frontend: http://localhost:3100
 - API: http://localhost:8800
 
-### LINE WORKS 연동
+### 네이버 웍스 연동
 
 `api/.dev.vars` 파일에 크레덴셜 설정:
 
@@ -124,7 +124,7 @@ NW_PRIVATE_KEY=-----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----
 | GET/PUT/DELETE | /api/projects/:id | 프로젝트 상세/수정/삭제 |
 | GET/POST | /api/settlements | 정산 목록/등록 |
 | GET/POST | /api/employees | 직원 목록/등록 |
-| POST | /api/admin/sync-employees | LINE WORKS 동기화 실행 |
+| POST | /api/admin/sync-employees | 네이버 웍스 동기화 실행 |
 | GET | /api/departments | 부서 목록 |
 | GET | /api/rate-cards | 단가표 |
 | GET | /api/clients | 거래처 목록 |

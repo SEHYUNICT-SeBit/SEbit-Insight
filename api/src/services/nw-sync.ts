@@ -1,11 +1,11 @@
 // ============================================================
-// SEbit Insight v1.0 - LINE WORKS Employee Sync Service
+// SEbit Insight v1.0 - 네이버 웍스 Employee Sync Service
 // ============================================================
 
 import type { Env, SyncResult } from '../types';
 import { generateId, nowISO } from '../db/helpers';
 
-// ---------- LINE WORKS API Types ----------
+// ---------- 네이버 웍스 API Types ----------
 interface NwUserName {
   lastName: string;
   firstName: string;
@@ -173,7 +173,7 @@ async function fetchAllUsers(accessToken: string): Promise<NwUser[]> {
   return users;
 }
 
-// ---------- Map LINE WORKS user to employee fields ----------
+// ---------- Map 네이버 웍스 user to employee fields ----------
 function mapNwUser(user: NwUser) {
   const org = user.organizations?.find((o) => o.primary) || user.organizations?.[0];
   const orgUnit = org?.orgUnits?.find((u) => u.primary) || org?.orgUnits?.[0];
@@ -319,7 +319,7 @@ export async function runSync(env: Env, db: D1Database): Promise<SyncResult> {
     return runDevSync(db);
   }
 
-  console.log('[Sync] Production mode: fetching from LINE WORKS API');
+  console.log('[Sync] Production mode: fetching from 네이버 웍스 API');
 
   // 1. Generate JWT
   const jwt = await generateServiceAccountJwt(env);
@@ -329,7 +329,7 @@ export async function runSync(env: Env, db: D1Database): Promise<SyncResult> {
 
   // 3. Fetch all users
   const nwUsers = await fetchAllUsers(accessToken);
-  console.log(`[Sync] Fetched ${nwUsers.length} users from LINE WORKS`);
+  console.log(`[Sync] Fetched ${nwUsers.length} users from 네이버 웍스`);
 
   // 4. Map users to employee records
   const mapped = nwUsers.map(mapNwUser);

@@ -109,7 +109,7 @@ app.notFound((c) => {
   );
 });
 
-// Scheduled handler for daily LINE WORKS sync
+// Scheduled handler for daily 네이버 웍스 sync
 const scheduled: ExportedHandlerScheduledHandler<Env> = async (event, env, ctx) => {
   console.log(`[Cron] Employee sync triggered at ${new Date().toISOString()}`);
   ctx.waitUntil(

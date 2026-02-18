@@ -331,7 +331,7 @@ function UserManagementTab() {
             disabled={isSyncing}
           >
             <RefreshCw className={cn('h-4 w-4 mr-1', isSyncing && 'animate-spin')} />
-            {isSyncing ? '동기화 중...' : 'LINE WORKS 동기화'}
+            {isSyncing ? '동기화 중...' : '네이버 웍스 동기화'}
           </Button>
         </div>
         {isLoading ? (

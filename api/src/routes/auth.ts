@@ -111,14 +111,14 @@ route.post('/dev-login', async (c) => {
 
 /**
  * GET /api/auth/login
- * LINE WORKS OAuth2 로그인 시작 또는 프론트엔드 로그인 페이지로 리다이렉트
+ * 네이버 웍스 OAuth2 로그인 시작 또는 프론트엔드 로그인 페이지로 리다이렉트
  */
 route.get('/login', async (c) => {
   const clientId = c.env.NW_CLIENT_ID;
   const redirectUri = c.env.NW_REDIRECT_URI;
 
   if (clientId && redirectUri) {
-    // LINE WORKS OAuth2 인증 시작
+    // 네이버 웍스 OAuth2 인증 시작
     const authUrl = new URL('https://auth.worksmobile.com/oauth2/v2.0/authorize');
     authUrl.searchParams.set('client_id', clientId);
     authUrl.searchParams.set('redirect_uri', redirectUri);
@@ -128,14 +128,14 @@ route.get('/login', async (c) => {
     return c.redirect(authUrl.toString());
   }
 
-  // LINE WORKS 미설정 시 프론트엔드 로그인 페이지로 리다이렉트
+  // 네이버 웍스 미설정 시 프론트엔드 로그인 페이지로 리다이렉트
   const frontendUrl = c.env.FRONTEND_URL || 'http://localhost:3100';
   return c.redirect(`${frontendUrl}/login`);
 });
 
 /**
  * GET /api/auth/callback
- * LINE WORKS OAuth2 콜백 - 인가 코드를 토큰으로 교환
+ * 네이버 웍스 OAuth2 콜백 - 인가 코드를 토큰으로 교환
  */
 route.get('/callback', async (c) => {
   const code = c.req.query('code');
