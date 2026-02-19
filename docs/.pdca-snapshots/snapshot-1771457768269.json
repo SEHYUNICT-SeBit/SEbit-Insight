@@ -1,9 +1,9 @@
 {
-  "timestamp": "2026-02-17T07:43:14.131Z",
+  "timestamp": "2026-02-18T23:36:08.267Z",
   "reason": "compaction",
   "status": {
     "version": "2.0",
-    "lastUpdated": "2026-02-17T07:41:57.575Z",
+    "lastUpdated": "2026-02-18T23:34:55.158Z",
     "activeFeatures": [
       "web",
       "api",
@@ -26,7 +26,10 @@
       "auth.service.ts",
       "permission.service.ts",
       "login",
-      "admin"
+      "admin",
+      "hr",
+      "edit",
+      "dashboard.service.ts"
     ],
     "primaryFeature": "web",
     "features": {
@@ -39,9 +42,9 @@
         "documents": {},
         "timestamps": {
           "started": "2026-02-17T06:18:06.220Z",
-          "lastUpdated": "2026-02-17T07:41:03.782Z"
+          "lastUpdated": "2026-02-18T23:33:43.086Z"
         },
-        "lastFile": "c:/vibe/SEbit Insight/web/src/components/common/DepartmentBadge.tsx"
+        "lastFile": "c:\\vibe\\SEbit Insight\\web\\src\\lib\\api-client.ts"
       },
       "api": {
         "phase": "do",
@@ -52,9 +55,9 @@
         "documents": {},
         "timestamps": {
           "started": "2026-02-17T06:19:07.305Z",
-          "lastUpdated": "2026-02-17T07:38:25.091Z"
+          "lastUpdated": "2026-02-18T23:23:26.966Z"
         },
-        "lastFile": "c:/vibe/SEbit Insight/api/src/types/index.ts"
+        "lastFile": "c:\\vibe\\SEbit Insight\\api\\src\\index.ts"
       },
       "db": {
         "phase": "do",
@@ -78,9 +81,9 @@
         "documents": {},
         "timestamps": {
           "started": "2026-02-17T06:19:45.120Z",
-          "lastUpdated": "2026-02-17T07:23:57.685Z"
+          "lastUpdated": "2026-02-18T23:33:24.223Z"
         },
-        "lastFile": "c:/vibe/SEbit Insight/api/src/middleware/role.ts"
+        "lastFile": "c:\\vibe\\SEbit Insight\\api\\src\\middleware\\auth.ts"
       },
       "validations": {
         "phase": "do",
@@ -91,9 +94,9 @@
         "documents": {},
         "timestamps": {
           "started": "2026-02-17T06:19:56.302Z",
-          "lastUpdated": "2026-02-17T07:39:33.872Z"
+          "lastUpdated": "2026-02-18T08:19:28.195Z"
         },
-        "lastFile": "c:/vibe/SEbit Insight/web/src/validations/project.ts"
+        "lastFile": "c:\\vibe\\SEbit Insight\\web\\src\\validations\\project.ts"
       },
       "routes": {
         "phase": "do",
@@ -104,9 +107,9 @@
         "documents": {},
         "timestamps": {
           "started": "2026-02-17T06:20:32.631Z",
-          "lastUpdated": "2026-02-17T07:40:56.131Z"
+          "lastUpdated": "2026-02-18T23:32:51.108Z"
         },
-        "lastFile": "c:/vibe/SEbit Insight/api/src/routes/projects.ts"
+        "lastFile": "c:\\vibe\\SEbit Insight\\api\\src\\routes\\auth.ts"
       },
       "contexts": {
         "phase": "do",
@@ -117,9 +120,9 @@
         "documents": {},
         "timestamps": {
           "started": "2026-02-17T06:21:05.703Z",
-          "lastUpdated": "2026-02-17T07:21:16.226Z"
+          "lastUpdated": "2026-02-18T23:34:13.331Z"
         },
-        "lastFile": "c:/vibe/SEbit Insight/web/src/contexts/UserContext.tsx"
+        "lastFile": "c:\\vibe\\SEbit Insight\\web\\src\\contexts\\UserContext.tsx"
       },
       "ui": {
         "phase": "do",
@@ -143,9 +146,9 @@
         "documents": {},
         "timestamps": {
           "started": "2026-02-17T06:23:40.420Z",
-          "lastUpdated": "2026-02-17T07:23:16.814Z"
+          "lastUpdated": "2026-02-18T06:10:56.330Z"
         },
-        "lastFile": "c:/vibe/SEbit Insight/web/src/components/layout/Header.tsx"
+        "lastFile": "c:\\vibe\\SEbit Insight\\web\\src\\components\\layout\\Sidebar.tsx"
       },
       "dashboard": {
         "phase": "do",
@@ -156,9 +159,9 @@
         "documents": {},
         "timestamps": {
           "started": "2026-02-17T06:24:46.195Z",
-          "lastUpdated": "2026-02-17T06:25:06.293Z"
+          "lastUpdated": "2026-02-18T15:18:00.068Z"
         },
-        "lastFile": "c:\\vibe\\SEbit Insight\\web\\src\\components\\dashboard\\RecentProjectsTable.tsx"
+        "lastFile": "c:\\vibe\\SEbit Insight\\web\\src\\components\\dashboard\\StaffPerformanceTable.tsx"
       },
       "projects": {
         "phase": "do",
@@ -169,9 +172,9 @@
         "documents": {},
         "timestamps": {
           "started": "2026-02-17T06:25:27.009Z",
-          "lastUpdated": "2026-02-17T07:40:55.393Z"
+          "lastUpdated": "2026-02-17T08:56:47.475Z"
         },
-        "lastFile": "c:/vibe/SEbit Insight/web/src/components/projects/ProjectTable.tsx"
+        "lastFile": "c:\\vibe\\SEbit Insight\\web\\src\\components\\projects\\ProjectTableRow.tsx"
       },
       "form": {
         "phase": "do",
@@ -182,9 +185,9 @@
         "documents": {},
         "timestamps": {
           "started": "2026-02-17T06:26:06.044Z",
-          "lastUpdated": "2026-02-17T07:40:35.781Z"
+          "lastUpdated": "2026-02-18T13:11:56.417Z"
         },
-        "lastFile": "c:/vibe/SEbit Insight/web/src/components/projects/form/Step4Confirm.tsx"
+        "lastFile": "c:\\vibe\\SEbit Insight\\web\\src\\components\\projects\\form\\Step4Confirm.tsx"
       },
       "new": {
         "phase": "do",
@@ -195,9 +198,9 @@
         "documents": {},
         "timestamps": {
           "started": "2026-02-17T06:27:31.504Z",
-          "lastUpdated": "2026-02-17T07:41:57.575Z"
+          "lastUpdated": "2026-02-18T08:21:42.349Z"
         },
-        "lastFile": "c:/vibe/SEbit Insight/web/src/app/projects/new/page.tsx"
+        "lastFile": "c:\\vibe\\SEbit Insight\\web\\src\\app\\projects\\new\\page.tsx"
       },
       "detail": {
         "phase": "do",
@@ -208,9 +211,9 @@
         "documents": {},
         "timestamps": {
           "started": "2026-02-17T06:28:06.571Z",
-          "lastUpdated": "2026-02-17T07:41:17.034Z"
+          "lastUpdated": "2026-02-17T11:30:47.132Z"
         },
-        "lastFile": "c:/vibe/SEbit Insight/web/src/components/projects/detail/ProjectDetailTabs.tsx"
+        "lastFile": "c:\\vibe\\SEbit Insight\\web\\src\\components\\projects\\detail\\ExpenseTable.tsx"
       },
       "[id]": {
         "phase": "do",
@@ -221,9 +224,9 @@
         "documents": {},
         "timestamps": {
           "started": "2026-02-17T06:28:43.789Z",
-          "lastUpdated": "2026-02-17T07:41:23.317Z"
+          "lastUpdated": "2026-02-18T23:21:20.421Z"
         },
-        "lastFile": "c:/vibe/SEbit Insight/web/src/app/projects/[id]/page.tsx"
+        "lastFile": "c:\\vibe\\SEbit Insight\\web\\src\\app\\projects\\[id]\\page.tsx"
       },
       "cost": {
         "phase": "do",
@@ -234,7 +237,7 @@
         "documents": {},
         "timestamps": {
           "started": "2026-02-17T06:29:08.237Z",
-          "lastUpdated": "2026-02-17T06:29:50.565Z"
+          "lastUpdated": "2026-02-18T23:21:23.593Z"
         },
         "lastFile": "c:\\vibe\\SEbit Insight\\web\\src\\app\\projects\\[id]\\cost\\page.tsx"
       },
@@ -299,7 +302,7 @@
         "documents": {},
         "timestamps": {
           "started": "2026-02-17T07:22:20.005Z",
-          "lastUpdated": "2026-02-17T07:34:56.615Z"
+          "lastUpdated": "2026-02-18T23:34:55.158Z"
         },
         "lastFile": "c:\\vibe\\SEbit Insight\\web\\src\\app\\login\\page.tsx"
       },
@@ -312,9 +315,48 @@
         "documents": {},
         "timestamps": {
           "started": "2026-02-17T07:24:43.226Z",
-          "lastUpdated": "2026-02-17T07:24:43.226Z"
+          "lastUpdated": "2026-02-18T23:02:18.231Z"
         },
-        "lastFile": "c:/vibe/SEbit Insight/web/src/app/admin/page.tsx"
+        "lastFile": "c:\\vibe\\SEbit Insight\\web\\src\\app\\admin\\page.tsx"
+      },
+      "hr": {
+        "phase": "do",
+        "phaseNumber": 3,
+        "matchRate": null,
+        "iterationCount": 0,
+        "requirements": [],
+        "documents": {},
+        "timestamps": {
+          "started": "2026-02-18T06:09:12.343Z",
+          "lastUpdated": "2026-02-18T23:02:19.894Z"
+        },
+        "lastFile": "c:\\vibe\\SEbit Insight\\web\\src\\components\\hr\\SyncStatusBar.tsx"
+      },
+      "edit": {
+        "phase": "do",
+        "phaseNumber": 3,
+        "matchRate": null,
+        "iterationCount": 0,
+        "requirements": [],
+        "documents": {},
+        "timestamps": {
+          "started": "2026-02-18T13:10:53.788Z",
+          "lastUpdated": "2026-02-18T23:21:22.014Z"
+        },
+        "lastFile": "c:\\vibe\\SEbit Insight\\web\\src\\app\\projects\\[id]\\edit\\page.tsx"
+      },
+      "dashboard.service.ts": {
+        "phase": "do",
+        "phaseNumber": 3,
+        "matchRate": null,
+        "iterationCount": 0,
+        "requirements": [],
+        "documents": {},
+        "timestamps": {
+          "started": "2026-02-18T15:08:24.809Z",
+          "lastUpdated": "2026-02-18T15:08:24.809Z"
+        },
+        "lastFile": "c:/vibe/SEbit Insight/web/src/services/dashboard.service.ts"
       }
     },
     "pipeline": {
@@ -325,7 +367,7 @@
     "session": {
       "startedAt": "2026-02-17T00:58:28.770Z",
       "onboardingCompleted": false,
-      "lastActivity": "2026-02-17T07:41:57.575Z"
+      "lastActivity": "2026-02-18T23:34:55.158Z"
     },
     "history": [
       {
@@ -1291,6 +1333,936 @@
       {
         "timestamp": "2026-02-17T07:41:57.575Z",
         "feature": "new",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-17T08:56:37.949Z",
+        "feature": "form",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-17T08:56:42.506Z",
+        "feature": "form",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-17T08:56:45.359Z",
+        "feature": "web",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-17T08:56:47.475Z",
+        "feature": "projects",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-17T08:57:18.944Z",
+        "feature": "detail",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-17T09:14:08.900Z",
+        "feature": "admin",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-17T09:14:10.951Z",
+        "feature": "api",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-17T09:14:17.050Z",
+        "feature": "api",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-17T09:14:18.956Z",
+        "feature": "admin",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-17T09:14:34.577Z",
+        "feature": "routes",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-17T09:14:36.132Z",
+        "feature": "admin",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-17T09:15:45.114Z",
+        "feature": "api",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-17T09:16:03.779Z",
+        "feature": "routes",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-17T09:16:16.590Z",
+        "feature": "api",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-17T09:16:22.761Z",
+        "feature": "api",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-17T09:16:28.663Z",
+        "feature": "api",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-17T09:16:37.284Z",
+        "feature": "api",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-17T11:22:21.866Z",
+        "feature": "api",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-17T11:22:24.295Z",
+        "feature": "api",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-17T11:22:45.271Z",
+        "feature": "routes",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-17T11:22:56.327Z",
+        "feature": "routes",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-17T11:23:02.061Z",
+        "feature": "routes",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-17T11:23:20.976Z",
+        "feature": "routes",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-17T11:24:28.687Z",
+        "feature": "web",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-17T11:24:38.908Z",
+        "feature": "validations",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-17T11:24:43.637Z",
+        "feature": "web",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-17T11:25:38.290Z",
+        "feature": "form",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-17T11:26:40.307Z",
+        "feature": "form",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-17T11:29:23.525Z",
+        "feature": "form",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-17T11:29:35.544Z",
+        "feature": "new",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-17T11:29:41.433Z",
+        "feature": "new",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-17T11:30:27.702Z",
+        "feature": "cost",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-17T11:30:34.205Z",
+        "feature": "cost",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-17T11:30:40.954Z",
+        "feature": "detail",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-17T11:30:47.132Z",
+        "feature": "detail",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-17T12:21:24.400Z",
+        "feature": "form",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-17T12:21:41.979Z",
+        "feature": "form",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-17T12:21:53.965Z",
+        "feature": "form",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-17T12:22:08.247Z",
+        "feature": "form",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-17T12:22:20.990Z",
+        "feature": "form",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-17T12:22:31.398Z",
+        "feature": "form",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-17T12:22:41.274Z",
+        "feature": "form",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-17T12:30:56.219Z",
+        "feature": "validations",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-17T12:31:14.065Z",
+        "feature": "form",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-17T12:31:20.329Z",
+        "feature": "form",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-17T12:31:27.450Z",
+        "feature": "form",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-17T12:31:44.617Z",
+        "feature": "form",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-17T12:31:56.255Z",
+        "feature": "form",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-17T12:32:15.940Z",
+        "feature": "form",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-17T14:00:44.985Z",
+        "feature": "form",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-17T14:00:53.658Z",
+        "feature": "form",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-18T06:06:14.897Z",
+        "feature": "api",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-18T06:06:20.853Z",
+        "feature": "api",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-18T06:06:57.773Z",
+        "feature": "routes",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-18T06:07:08.482Z",
+        "feature": "api",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-18T06:07:17.976Z",
+        "feature": "api",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-18T06:07:25.443Z",
+        "feature": "api",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-18T06:07:53.180Z",
+        "feature": "web",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-18T06:08:01.785Z",
+        "feature": "web",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-18T06:08:08.461Z",
+        "feature": "web",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-18T06:08:18.323Z",
+        "feature": "web",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-18T06:08:32.925Z",
+        "feature": "web",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-18T06:09:12.343Z",
+        "feature": "hr",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-18T06:09:25.126Z",
+        "feature": "hr",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-18T06:09:44.483Z",
+        "feature": "hr",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-18T06:10:01.642Z",
+        "feature": "hr",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-18T06:10:27.081Z",
+        "feature": "hr",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-18T06:10:34.065Z",
+        "feature": "layout",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-18T06:10:42.032Z",
+        "feature": "layout",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-18T06:10:48.239Z",
+        "feature": "layout",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-18T06:10:56.330Z",
+        "feature": "layout",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-18T08:03:23.075Z",
+        "feature": "api",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-18T08:03:40.525Z",
+        "feature": "routes",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-18T08:03:54.111Z",
+        "feature": "web",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-18T08:04:04.874Z",
+        "feature": "dashboard",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-18T08:04:19.525Z",
+        "feature": "dashboard",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-18T08:04:39.590Z",
+        "feature": "web",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-18T08:04:46.236Z",
+        "feature": "web",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-18T08:11:22.325Z",
+        "feature": "api",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-18T08:11:35.469Z",
+        "feature": "routes",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-18T08:11:50.224Z",
+        "feature": "web",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-18T08:12:05.152Z",
+        "feature": "dashboard",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-18T08:12:24.325Z",
+        "feature": "dashboard",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-18T08:12:37.987Z",
+        "feature": "dashboard",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-18T08:19:28.195Z",
+        "feature": "validations",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-18T08:21:10.580Z",
+        "feature": "form",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-18T08:21:35.565Z",
+        "feature": "new",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-18T08:21:42.349Z",
+        "feature": "new",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-18T08:22:01.551Z",
+        "feature": "web",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-18T08:22:19.148Z",
+        "feature": "routes",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-18T08:22:31.122Z",
+        "feature": "routes",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-18T08:22:47.349Z",
+        "feature": "dashboard",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-18T12:59:10.171Z",
+        "feature": "api",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-18T12:59:32.035Z",
+        "feature": "routes",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-18T12:59:45.138Z",
+        "feature": "web",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-18T13:00:11.628Z",
+        "feature": "dashboard",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-18T13:07:58.112Z",
+        "feature": "routes",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-18T13:08:16.834Z",
+        "feature": "routes",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-18T13:08:30.257Z",
+        "feature": "routes",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-18T13:08:49.176Z",
+        "feature": "routes",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-18T13:09:13.488Z",
+        "feature": "web",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-18T13:09:21.055Z",
+        "feature": "web",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-18T13:09:27.781Z",
+        "feature": "web",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-18T13:10:53.788Z",
+        "feature": "edit",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-18T13:11:12.509Z",
+        "feature": "form",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-18T13:11:56.417Z",
+        "feature": "form",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-18T13:12:23.388Z",
+        "feature": "[id]",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-18T13:12:34.000Z",
+        "feature": "[id]",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-18T13:13:20.020Z",
+        "feature": "edit",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-18T13:41:48.663Z",
+        "feature": "dashboard",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-18T13:41:50.888Z",
+        "feature": "dashboard",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-18T13:45:19.343Z",
+        "feature": "dashboard",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-18T15:05:51.949Z",
+        "feature": "routes",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-18T15:07:28.193Z",
+        "feature": "api",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-18T15:07:33.872Z",
+        "feature": "api",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-18T15:08:16.450Z",
+        "feature": "web",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-18T15:08:24.809Z",
+        "feature": "dashboard.service.ts",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-18T15:08:40.414Z",
+        "feature": "web",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-18T15:08:46.687Z",
+        "feature": "web",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-18T15:09:28.603Z",
+        "feature": "dashboard",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-18T15:09:38.309Z",
+        "feature": "dashboard",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-18T15:09:47.660Z",
+        "feature": "dashboard",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-18T15:09:58.231Z",
+        "feature": "dashboard",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-18T15:10:46.565Z",
+        "feature": "web",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-18T15:14:33.868Z",
+        "feature": "routes",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-18T15:16:27.804Z",
+        "feature": "web",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-18T15:16:33.562Z",
+        "feature": "web",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-18T15:16:42.132Z",
+        "feature": "web",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-18T15:16:47.538Z",
+        "feature": "web",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-18T15:16:59.243Z",
+        "feature": "web",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-18T15:18:00.069Z",
+        "feature": "dashboard",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-18T15:18:10.153Z",
+        "feature": "web",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-18T15:28:42.907Z",
+        "feature": "api",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-18T23:02:15.090Z",
+        "feature": "api",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-18T23:02:18.231Z",
+        "feature": "admin",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-18T23:02:19.894Z",
+        "feature": "hr",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-18T23:02:21.476Z",
+        "feature": "api",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-18T23:02:23.022Z",
+        "feature": "routes",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-18T23:02:24.581Z",
+        "feature": "routes",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-18T23:17:59.529Z",
+        "feature": "web",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-18T23:18:51.739Z",
+        "feature": "[id]",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-18T23:18:56.997Z",
+        "feature": "[id]",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-18T23:19:27.772Z",
+        "feature": "edit",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-18T23:19:33.110Z",
+        "feature": "edit",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-18T23:19:57.220Z",
+        "feature": "cost",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-18T23:20:09.211Z",
+        "feature": "cost",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-18T23:21:20.421Z",
+        "feature": "[id]",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-18T23:21:22.014Z",
+        "feature": "edit",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-18T23:21:23.593Z",
+        "feature": "cost",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-18T23:23:26.966Z",
+        "feature": "api",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-18T23:32:51.108Z",
+        "feature": "routes",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-18T23:33:24.223Z",
+        "feature": "middleware",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-18T23:33:43.086Z",
+        "feature": "web",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-18T23:34:13.331Z",
+        "feature": "contexts",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-18T23:34:55.158Z",
+        "feature": "login",
         "phase": "do",
         "action": "updated"
       }

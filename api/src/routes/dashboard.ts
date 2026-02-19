@@ -191,7 +191,12 @@ route.get('/summary', async (c) => {
       }
     }
 
-    const byDepartment = allDepts.map((d: any) => {
+    // 경영기획그룹(MGMT)은 매출 발생 부서가 아니므로 제외, 고정 정렬
+    const DEPT_ORDER = ['SE', 'SM', 'AI', 'RND', 'CONTENT'];
+    const revenueDepts = DEPT_ORDER
+      .map(id => allDepts.find((d: any) => d.id === id))
+      .filter(Boolean) as any[];
+    const byDepartment = revenueDepts.map((d: any) => {
       const s = deptSummaryMap.get(d.id)!;
       return {
         department_id: d.id,

@@ -196,7 +196,12 @@ route.get('/performance', async (c) => {
 
     const deptPerformance = [];
 
-    for (const dept of allDepts) {
+    // 경영기획그룹(MGMT)은 매출 발생 부서가 아니므로 제외, 고정 정렬
+    const DEPT_ORDER = ['SE', 'SM', 'AI', 'RND', 'CONTENT'];
+    const revenueDepts = DEPT_ORDER
+      .map(id => allDepts.find((d: any) => d.id === id))
+      .filter(Boolean) as any[];
+    for (const dept of revenueDepts) {
       const deptId = dept.id as string;
       const deptName = dept.name as string;
 
@@ -336,7 +341,11 @@ route.get('/performance/staffing', async (c) => {
       empSql += ' AND e.department_id = ?';
       empParams.push(departmentId);
     }
-    empSql += ' ORDER BY d.name, e.position DESC, e.name';
+    // 고정 부서 순서 적용 (CASE)
+    empSql += ` ORDER BY CASE e.department_id
+      WHEN 'SE' THEN 1 WHEN 'SM' THEN 2 WHEN 'AI' THEN 3
+      WHEN 'RND' THEN 4 WHEN 'CONTENT' THEN 5 ELSE 9 END,
+      e.position DESC, e.name`;
 
     const { results: employees } = await c.env.DB
       .prepare(empSql)
@@ -432,8 +441,12 @@ route.get('/performance/staffing', async (c) => {
       };
     });
 
-    // 6. 부서별 요약 통계
-    const deptSummary = allDepts
+    // 6. 부서별 요약 통계 (고정 정렬, MGMT 제외)
+    const STAFFING_DEPT_ORDER = ['SE', 'SM', 'AI', 'RND', 'CONTENT'];
+    const orderedDepts = STAFFING_DEPT_ORDER
+      .map(id => allDepts.find((d: any) => d.id === id))
+      .filter(Boolean) as any[];
+    const deptSummary = orderedDepts
       .filter((d: any) => !departmentId || d.id === departmentId)
       .map((d: any) => {
         const deptMembers = members.filter((m: any) => m.department_id === d.id);
@@ -453,7 +466,7 @@ route.get('/performance/staffing', async (c) => {
 
     return c.json({
       year,
-      departments: allDepts,
+      departments: orderedDepts,
       dept_summary: deptSummary,
       members,
     });
