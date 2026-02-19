@@ -122,11 +122,13 @@ route.get('/login', async (c) => {
   const redirectUri = c.env.NW_REDIRECT_URI;
 
   if (clientId && redirectUri) {
+    const state = crypto.randomUUID();
     const authUrl = new URL('https://auth.worksmobile.com/oauth2/v2.0/authorize');
     authUrl.searchParams.set('client_id', clientId);
     authUrl.searchParams.set('redirect_uri', redirectUri);
     authUrl.searchParams.set('response_type', 'code');
-    authUrl.searchParams.set('scope', 'user.profile.read user.email.read');
+    authUrl.searchParams.set('scope', 'openid profile email');
+    authUrl.searchParams.set('state', state);
 
     return c.redirect(authUrl.toString());
   }
@@ -174,31 +176,58 @@ route.get('/callback', async (c) => {
       return c.redirect(`${frontendUrl}/login?error=token_exchange_failed`);
     }
 
-    const tokenData = await tokenResponse.json() as { access_token: string };
-
-    // 사용자 프로필 조회
-    const profileResponse = await fetch('https://www.worksapis.com/v1.0/users/me', {
-      headers: { Authorization: `Bearer ${tokenData.access_token}` },
-    });
-
-    if (!profileResponse.ok) {
-      console.error('Profile fetch failed:', await profileResponse.text());
-      return c.redirect(`${frontendUrl}/login?error=profile_fetch_failed`);
-    }
-
-    const profile = await profileResponse.json() as {
-      userId: string;
-      userName: { lastName?: string; firstName?: string };
-      email?: string;
+    const tokenData = await tokenResponse.json() as {
+      access_token: string;
+      id_token?: string;
     };
 
-    const email = profile.email || `${profile.userId}@lineworks`;
-    const name = `${profile.userName?.lastName || ''}${profile.userName?.firstName || ''}`.trim() || profile.userId;
+    // id_token에서 사용자 정보 추출 (OIDC 표준 - CAD 프로젝트와 동일 방식)
+    let externalId = '';
+    let email = '';
+    let name = '';
+
+    if (tokenData.id_token) {
+      // id_token은 JWT - 페이로드 디코딩 (서버간 HTTPS 통신이므로 서명 검증 생략)
+      try {
+        const payload = JSON.parse(atob(tokenData.id_token.split('.')[1].replace(/-/g, '+').replace(/_/g, '/')));
+        externalId = payload.sub || '';
+        email = payload.email || '';
+        name = payload.name || '';
+      } catch (e) {
+        console.error('Failed to decode id_token:', e);
+        return c.redirect(`${frontendUrl}/login?error=token_decode_failed`);
+      }
+    } else {
+      // id_token이 없는 경우 /users/me API fallback
+      const profileResponse = await fetch('https://www.worksapis.com/v1.0/users/me', {
+        headers: { Authorization: `Bearer ${tokenData.access_token}` },
+      });
+
+      if (!profileResponse.ok) {
+        console.error('Profile fetch failed:', await profileResponse.text());
+        return c.redirect(`${frontendUrl}/login?error=profile_fetch_failed`);
+      }
+
+      const profile = await profileResponse.json() as {
+        userId: string;
+        userName: { lastName?: string; firstName?: string };
+        email?: string;
+      };
+      externalId = profile.userId;
+      email = profile.email || `${profile.userId}@lineworks`;
+      name = `${profile.userName?.lastName || ''}${profile.userName?.firstName || ''}`.trim() || profile.userId;
+    }
+
+    if (!externalId) {
+      return c.redirect(`${frontendUrl}/login?error=no_user_id`);
+    }
+    if (!email) email = `${externalId}@lineworks`;
+    if (!name) name = externalId;
 
     // 직원 조회 (nw_user_id 또는 이메일로)
     let employee = await c.env.DB
       .prepare('SELECT id, name, role FROM employees WHERE nw_user_id = ? AND is_active = 1')
-      .bind(profile.userId)
+      .bind(externalId)
       .first<AuthUser>();
 
     if (!employee) {
@@ -216,16 +245,16 @@ route.get('/callback', async (c) => {
       await c.env.DB
         .prepare(
           `INSERT INTO employees (id, name, email, department_id, position, role, nw_user_id)
-           VALUES (?, ?, ?, 'GENERAL', 'Staff', 'user', ?)`
+           VALUES (?, ?, ?, NULL, 'Staff', 'user', ?)`
         )
-        .bind(newId, name, email, profile.userId)
+        .bind(newId, name, email, externalId)
         .run();
 
       employee = { id: newId, name, role: 'user' };
     } else {
       await c.env.DB
         .prepare('UPDATE employees SET nw_user_id = ? WHERE id = ?')
-        .bind(profile.userId, employee.id)
+        .bind(externalId, employee.id)
         .run();
     }
 
