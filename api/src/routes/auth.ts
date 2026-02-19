@@ -126,7 +126,7 @@ route.get('/login', async (c) => {
     authUrl.searchParams.set('client_id', clientId);
     authUrl.searchParams.set('redirect_uri', redirectUri);
     authUrl.searchParams.set('response_type', 'code');
-    authUrl.searchParams.set('scope', 'profile');
+    authUrl.searchParams.set('scope', 'user.profile.read user.email.read');
 
     return c.redirect(authUrl.toString());
   }
