@@ -98,4 +98,34 @@ export const projectService = {
   ): Promise<CostAnalysis> {
     return apiClient.put(`/api/projects/${projectId}/cost-analysis`, data);
   },
+
+  // Bulk Upload
+  async bulkCreate(data: {
+    projects: Array<{
+      row_index: number;
+      name: string;
+      type: string;
+      department_ids: string[];
+      client_id?: string;
+      client_name?: string;
+      sales_rep_id?: string;
+      pm_id?: string;
+      pm_type?: string;
+      pm_name?: string;
+      contract_amount: number;
+      start_date: string;
+      end_date: string;
+      description?: string;
+      status?: string;
+    }>;
+    auto_create_clients: boolean;
+  }): Promise<{
+    total: number;
+    succeeded: number;
+    failed: number;
+    results: Array<{ row_index: number; success: boolean; project_id?: string; project_code?: string; error?: string }>;
+    created_clients: Array<{ name: string; id: string }>;
+  }> {
+    return apiClient.post('/api/projects/bulk', data);
+  },
 };

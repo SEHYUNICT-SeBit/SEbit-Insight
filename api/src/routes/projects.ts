@@ -231,6 +231,144 @@ route.post('/drafts', async (c) => {
 });
 
 /**
+ * POST /api/projects/bulk
+ * CSV/Excel 일괄 등록 (admin, master)
+ * NOTE: Must be before /:id to avoid route conflicts
+ */
+route.post('/bulk', requireRole('admin'), async (c) => {
+  try {
+    const user = c.get('user');
+    const body = await c.req.json<{
+      projects: Array<{
+        row_index: number;
+        name: string;
+        type: string;
+        department_ids: string[];
+        client_id?: string;
+        client_name?: string;
+        sales_rep_id?: string;
+        pm_id?: string;
+        pm_type?: string;
+        pm_name?: string;
+        contract_amount: number;
+        start_date: string;
+        end_date: string;
+        description?: string;
+        status?: string;
+      }>;
+      auto_create_clients: boolean;
+    }>();
+
+    if (!body.projects || !Array.isArray(body.projects) || body.projects.length === 0) {
+      return c.json({ error: 'VALIDATION_ERROR', message: 'projects array is required' }, 400);
+    }
+
+    if (body.projects.length > 100) {
+      return c.json({ error: 'VALIDATION_ERROR', message: 'Maximum 100 projects per batch' }, 400);
+    }
+
+    const results: Array<{
+      row_index: number;
+      success: boolean;
+      project_id?: string;
+      project_code?: string;
+      error?: string;
+    }> = [];
+    const createdClients: Array<{ name: string; id: string }> = [];
+    const now = nowISO();
+
+    for (const item of body.projects) {
+      try {
+        // Validate required fields
+        if (!item.name || !item.type || !item.department_ids?.length) {
+          throw new Error('필수 항목 누락: 프로젝트명, 유형, 부서');
+        }
+
+        if (!['SI', 'SM'].includes(item.type)) {
+          throw new Error(`유형이 올바르지 않음: "${item.type}"`);
+        }
+
+        // Resolve client
+        let clientId = item.client_id || null;
+        if (!clientId && item.client_name && body.auto_create_clients) {
+          const existing = await c.env.DB
+            .prepare("SELECT id FROM clients WHERE LOWER(name) = LOWER(?)")
+            .bind(item.client_name.trim())
+            .first<{ id: string }>();
+
+          if (existing) {
+            clientId = existing.id;
+          } else {
+            clientId = generateId('cli');
+            await c.env.DB
+              .prepare('INSERT INTO clients (id, name) VALUES (?, ?)')
+              .bind(clientId, item.client_name.trim())
+              .run();
+            createdClients.push({ name: item.client_name.trim(), id: clientId });
+          }
+        }
+
+        const primaryDeptId = item.department_ids[0];
+        const id = generateId('proj');
+        const projectCode = await generateProjectCode(c.env.DB, primaryDeptId);
+        const status = item.status || 'active';
+        const pmType = item.pm_type || 'employee';
+        const pmId = pmType === 'employee' ? (item.pm_id || null) : null;
+        const pmName = pmType === 'freelancer' ? (item.pm_name || null) : null;
+
+        await c.env.DB
+          .prepare(
+            `INSERT INTO projects
+             (id, project_code, name, type, status, department_id, client_id,
+              sales_rep_id, pm_id, pm_type, pm_name, contract_amount,
+              start_date, end_date, description, is_draft, draft_step,
+              created_by, created_at, updated_at)
+             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 0, 4, ?, ?, ?)`
+          )
+          .bind(
+            id, projectCode, item.name, item.type, status,
+            primaryDeptId, clientId,
+            item.sales_rep_id || null,
+            pmId, pmType, pmName,
+            item.contract_amount || 0,
+            item.start_date || null,
+            item.end_date || null,
+            item.description || null,
+            user.id, now, now
+          )
+          .run();
+
+        await setProjectDepartments(c.env.DB, id, item.department_ids, primaryDeptId);
+
+        results.push({
+          row_index: item.row_index,
+          success: true,
+          project_id: id,
+          project_code: projectCode,
+        });
+      } catch (err: any) {
+        results.push({
+          row_index: item.row_index,
+          success: false,
+          error: err.message || 'Unknown error',
+        });
+      }
+    }
+
+    return c.json({
+      total: body.projects.length,
+      succeeded: results.filter((r) => r.success).length,
+      failed: results.filter((r) => !r.success).length,
+      results,
+      created_clients: createdClients,
+    });
+  } catch (err) {
+    console.error('POST /projects/bulk error:', err);
+    return c.json({ error: 'INTERNAL_ERROR', message: 'Database error' }, 500);
+  }
+});
+
+/**
  * GET /api/projects
  * 프로젝트 목록 (필터/검색/페이지네이션)
  */
