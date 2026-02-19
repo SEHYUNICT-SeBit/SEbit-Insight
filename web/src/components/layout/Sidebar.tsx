@@ -6,7 +6,7 @@ import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
 import {
   LayoutDashboard, FolderKanban, Users, Receipt, Settings,
-  User, Shield, ChevronLeft, ChevronRight,
+  User, Shield, Menu,
 } from 'lucide-react';
 import { useUser } from '@/contexts/UserContext';
 import { Badge } from '@/components/ui/badge';
@@ -84,8 +84,8 @@ export function Sidebar({ collapsed, onToggle }: SidebarProps) {
         )}
       >
         {/* Header */}
-        <div className={cn('p-4 border-b', collapsed && 'px-3')}>
-          <Link href="/" className="flex items-center gap-2">
+        <div className={cn('p-4 border-b flex items-center', collapsed ? 'px-3 justify-center' : 'justify-between')}>
+          <Link href="/" className="flex items-center gap-2 min-w-0">
             <div className="h-8 w-8 rounded-lg bg-primary flex items-center justify-center flex-shrink-0">
               <span className="text-primary-foreground font-bold text-sm">SE</span>
             </div>
@@ -93,6 +93,17 @@ export function Sidebar({ collapsed, onToggle }: SidebarProps) {
               <span className="font-bold text-lg whitespace-nowrap">SEbit Insight</span>
             )}
           </Link>
+          {!collapsed && (
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={onToggle}
+              className="h-8 w-8 flex-shrink-0"
+              title="메뉴 접기"
+            >
+              <Menu className="h-5 w-5" />
+            </Button>
+          )}
         </div>
 
         {/* Navigation */}
@@ -152,24 +163,27 @@ export function Sidebar({ collapsed, onToggle }: SidebarProps) {
           )}
         </div>
 
-        {/* Toggle Button */}
-        <div className={cn('p-2 border-t', collapsed && 'px-2')}>
-          <Button
-            variant="ghost"
-            size="sm"
-            onClick={onToggle}
-            className={cn('w-full', collapsed ? 'px-0 justify-center' : 'justify-start gap-2')}
-          >
-            {collapsed ? (
-              <ChevronRight className="h-4 w-4" />
-            ) : (
-              <>
-                <ChevronLeft className="h-4 w-4" />
-                <span className="text-xs text-muted-foreground">메뉴 접기</span>
-              </>
-            )}
-          </Button>
-        </div>
+        {/* Toggle Button (collapsed only) */}
+        {collapsed && (
+          <div className="p-2 border-t">
+            <Tooltip delayDuration={0}>
+              <TooltipTrigger asChild>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={onToggle}
+                  className="w-full px-0 justify-center"
+                  title="메뉴 펼치기"
+                >
+                  <Menu className="h-5 w-5" />
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent side="right" sideOffset={8}>
+                메뉴 펼치기
+              </TooltipContent>
+            </Tooltip>
+          </div>
+        )}
       </aside>
     </TooltipProvider>
   );
