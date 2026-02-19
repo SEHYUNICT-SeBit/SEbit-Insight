@@ -9,7 +9,7 @@ database_name = "sebit-insight"
 database_id = "e440e64b-801d-4272-82f1-e3193e3f0e64"
 
 [vars]
-ENVIRONMENT = "development"
+ENVIRONMENT = "production"
 ACCESS_TEAM_DOMAIN = "sebit.cloudflareaccess.com"
 
 # 아래 값들은 wrangler secret으로 관리 (production에서 override)
