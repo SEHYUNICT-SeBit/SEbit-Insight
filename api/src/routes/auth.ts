@@ -11,9 +11,22 @@ import type { AppBindings, AuthUser } from '../types';
 const route = new Hono<AppBindings>();
 
 /**
+ * 크로스 도메인 쿠키 설정 헬퍼
+ * API와 Frontend가 다른 도메인일 때 sameSite: 'None' + secure: true 필요
+ */
+function setSessionCookie(c: any, sessionId: string) {
+  setCookie(c, 'session_id', sessionId, {
+    httpOnly: true,
+    sameSite: 'None',
+    path: '/',
+    secure: true,
+    maxAge: 24 * 60 * 60, // 24시간
+  });
+}
+
+/**
  * GET /api/auth/me
  * 현재 로그인 사용자 정보 반환
- * (authMiddleware를 통해 c.get('user') 세팅 필요)
  */
 route.get('/me', async (c) => {
   try {
@@ -22,7 +35,6 @@ route.get('/me', async (c) => {
       return c.json({ error: 'UNAUTHORIZED', message: 'Not authenticated' }, 401);
     }
 
-    // 부서 정보 포함하여 직원 조회
     const employee = await c.env.DB
       .prepare(
         `SELECT e.id, e.name, e.email, e.department_id,
@@ -52,7 +64,6 @@ route.get('/me', async (c) => {
  * Body: { email: string }
  */
 route.post('/dev-login', async (c) => {
-  // 프로덕션 환경에서는 사용 불가
   if (c.env.ENVIRONMENT === 'production') {
     return c.json({ error: 'FORBIDDEN', message: 'Dev login is not available in production' }, 403);
   }
@@ -64,7 +75,6 @@ route.post('/dev-login', async (c) => {
       return c.json({ error: 'VALIDATION_ERROR', message: 'email is required' }, 400);
     }
 
-    // 이메일로 직원 조회
     const employee = await c.env.DB
       .prepare(
         `SELECT e.id, e.name, e.email, e.department_id,
@@ -92,17 +102,11 @@ route.post('/dev-login', async (c) => {
       .bind(sessionId, (employee as any).id, expiresAt)
       .run();
 
-    // httpOnly 세션 쿠키 설정
-    const isProduction = c.env.ENVIRONMENT === 'production';
-    setCookie(c, 'session_id', sessionId, {
-      httpOnly: true,
-      sameSite: 'Lax',
-      path: '/',
-      secure: isProduction,
-      maxAge: 24 * 60 * 60, // 24시간
-    });
+    // 쿠키 설정 (크로스 도메인 지원)
+    setSessionCookie(c, sessionId);
 
-    return c.json({ data: employee });
+    // session_id를 응답에 포함 (프론트엔드 localStorage 저장용)
+    return c.json({ data: employee, session_id: sessionId });
   } catch (err) {
     console.error('POST /auth/dev-login error:', err);
     return c.json({ error: 'INTERNAL_ERROR', message: 'Database error' }, 500);
@@ -111,14 +115,13 @@ route.post('/dev-login', async (c) => {
 
 /**
  * GET /api/auth/login
- * 네이버 웍스 OAuth2 로그인 시작 또는 프론트엔드 로그인 페이지로 리다이렉트
+ * 네이버 웍스 OAuth2 로그인 시작
  */
 route.get('/login', async (c) => {
   const clientId = c.env.NW_CLIENT_ID;
   const redirectUri = c.env.NW_REDIRECT_URI;
 
   if (clientId && redirectUri) {
-    // 네이버 웍스 OAuth2 인증 시작
     const authUrl = new URL('https://auth.worksmobile.com/oauth2/v2.0/authorize');
     authUrl.searchParams.set('client_id', clientId);
     authUrl.searchParams.set('redirect_uri', redirectUri);
@@ -128,9 +131,8 @@ route.get('/login', async (c) => {
     return c.redirect(authUrl.toString());
   }
 
-  // 네이버 웍스 미설정 시 프론트엔드 로그인 페이지로 리다이렉트
   const frontendUrl = c.env.FRONTEND_URL || 'http://localhost:3100';
-  return c.redirect(`${frontendUrl}/login`);
+  return c.redirect(`${frontendUrl}/login?error=oauth_not_configured`);
 });
 
 /**
@@ -221,7 +223,6 @@ route.get('/callback', async (c) => {
 
       employee = { id: newId, name, role: 'user' };
     } else {
-      // nw_user_id 업데이트 (누락된 경우)
       await c.env.DB
         .prepare('UPDATE employees SET nw_user_id = ? WHERE id = ?')
         .bind(profile.userId, employee.id)
@@ -237,17 +238,11 @@ route.get('/callback', async (c) => {
       .bind(sessionId, employee.id, expiresAt)
       .run();
 
-    // 쿠키 설정
-    const isProduction = c.env.ENVIRONMENT === 'production';
-    setCookie(c, 'session_id', sessionId, {
-      httpOnly: true,
-      sameSite: 'Lax',
-      path: '/',
-      secure: isProduction,
-      maxAge: 24 * 60 * 60,
-    });
+    // 쿠키 설정 (크로스 도메인 지원)
+    setSessionCookie(c, sessionId);
 
-    return c.redirect(frontendUrl);
+    // 프론트엔드로 리다이렉트 (session_token을 URL에 포함 - 쿠키 실패 fallback)
+    return c.redirect(`${frontendUrl}/login?session_token=${sessionId}`);
   } catch (err) {
     console.error('GET /auth/callback error:', err);
     return c.redirect(`${frontendUrl}/login?error=internal_error`);
@@ -260,18 +255,22 @@ route.get('/callback', async (c) => {
  */
 route.post('/logout', async (c) => {
   try {
-    const sessionId = getCookie(c, 'session_id');
+    // 쿠키 또는 Authorization 헤더에서 세션 ID 확인
+    const sessionId = getCookie(c, 'session_id')
+      || c.req.header('Authorization')?.replace('Bearer ', '');
 
     if (sessionId) {
-      // DB에서 세션 삭제
       await c.env.DB
         .prepare('DELETE FROM sessions WHERE id = ?')
         .bind(sessionId)
         .run();
     }
 
-    // 쿠키 제거
-    deleteCookie(c, 'session_id', { path: '/' });
+    deleteCookie(c, 'session_id', {
+      path: '/',
+      sameSite: 'None',
+      secure: true,
+    });
 
     return c.json({ message: 'Logged out successfully' });
   } catch (err) {

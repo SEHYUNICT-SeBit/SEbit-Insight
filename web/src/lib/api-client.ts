@@ -43,9 +43,17 @@ function buildUrl(path: string, params?: Record<string, string | number | undefi
 }
 
 function getHeaders(): HeadersInit {
-  return {
+  const headers: Record<string, string> = {
     'Content-Type': 'application/json',
   };
+  // 크로스 도메인 쿠키 실패 fallback: localStorage의 세션 토큰을 Bearer 헤더로 전송
+  if (typeof window !== 'undefined') {
+    const token = localStorage.getItem('session_token');
+    if (token) {
+      headers['Authorization'] = `Bearer ${token}`;
+    }
+  }
+  return headers;
 }
 
 export const apiClient = {

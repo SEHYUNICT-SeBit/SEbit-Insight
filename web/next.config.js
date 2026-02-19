@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  // output: 'export', // 동적 라우트([id]) 사용으로 제거 - Cloudflare Pages에서 SSR 지원
+  output: 'export',
   images: {
     unoptimized: true,
   },

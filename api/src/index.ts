@@ -42,7 +42,7 @@ const app = new Hono<AppBindings>();
 app.use(
   '*',
   cors({
-    origin: ['https://insight.sebit.co.kr', 'http://localhost:5173', 'http://localhost:3000', 'http://localhost:3100'],
+    origin: ['https://insight.sebit.co.kr', 'https://sebit-insight-web.pages.dev', 'http://localhost:5173', 'http://localhost:3000', 'http://localhost:3100'],
     credentials: true,
     allowMethods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowHeaders: ['Content-Type', 'Authorization', 'Cf-Access-Jwt-Assertion', 'X-Dev-Email'],
