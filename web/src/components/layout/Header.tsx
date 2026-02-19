@@ -1,9 +1,9 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Menu, LayoutDashboard, FolderKanban, Receipt, Settings, LogOut, Shield } from 'lucide-react';
+import { Menu, LayoutDashboard, FolderKanban, Receipt, Settings, LogOut, Shield, Sun, Moon, Users } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from '@/components/ui/sheet';
@@ -18,10 +18,10 @@ const roleLabels: Record<string, string> = {
 };
 
 const roleBadgeColors: Record<string, string> = {
-  master: 'bg-purple-100 text-purple-800 border-purple-200',
-  admin: 'bg-blue-100 text-blue-800 border-blue-200',
-  manager: 'bg-green-100 text-green-800 border-green-200',
-  user: 'bg-gray-100 text-gray-800 border-gray-200',
+  master: 'bg-purple-100 text-purple-800 border-purple-200 dark:bg-purple-900/30 dark:text-purple-300 dark:border-purple-700',
+  admin: 'bg-blue-100 text-blue-800 border-blue-200 dark:bg-blue-900/30 dark:text-blue-300 dark:border-blue-700',
+  manager: 'bg-green-100 text-green-800 border-green-200 dark:bg-green-900/30 dark:text-green-300 dark:border-green-700',
+  user: 'bg-gray-100 text-gray-800 border-gray-200 dark:bg-gray-900/30 dark:text-gray-300 dark:border-gray-700',
 };
 
 const navItems = [
@@ -38,6 +38,7 @@ const pageNames: Record<string, string> = {
   '/settlements': '정산 관리',
   '/settings': '마스터 데이터',
   '/admin': '권한 관리',
+  '/hr': '인사정보',
   '/login': '로그인',
 };
 
@@ -48,10 +49,29 @@ function getPageName(pathname: string): string {
   return '페이지';
 }
 
+const THEME_KEY = 'sebit-theme';
+
 export function Header() {
   const pathname = usePathname();
-  const { user, isMaster, logout } = useUser();
+  const { user, isMaster, isAdmin, logout } = useUser();
   const [sheetOpen, setSheetOpen] = useState(false);
+  const [dark, setDark] = useState(false);
+
+  useEffect(() => {
+    const saved = localStorage.getItem(THEME_KEY);
+    const isDark = saved === 'dark' || (!saved && window.matchMedia('(prefers-color-scheme: dark)').matches);
+    setDark(isDark);
+    document.documentElement.classList.toggle('dark', isDark);
+  }, []);
+
+  const toggleTheme = () => {
+    setDark((prev) => {
+      const next = !prev;
+      document.documentElement.classList.toggle('dark', next);
+      localStorage.setItem(THEME_KEY, next ? 'dark' : 'light');
+      return next;
+    });
+  };
 
   const pageName = getPageName(pathname);
 
@@ -73,7 +93,7 @@ export function Header() {
         <h1 className="text-lg font-semibold">{pageName}</h1>
       </div>
 
-      <div className="flex items-center gap-3">
+      <div className="flex items-center gap-2">
         <span className="text-sm text-muted-foreground hidden sm:inline">
           {user?.name || '사용자'}
         </span>
@@ -83,6 +103,16 @@ export function Header() {
         >
           {roleLabels[user?.role || 'user'] || '사용자'}
         </Badge>
+
+        <Button
+          variant="ghost"
+          size="icon"
+          onClick={toggleTheme}
+          title={dark ? '라이트 모드' : '다크 모드'}
+        >
+          {dark ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+        </Button>
+
         <Button
           variant="ghost"
           size="icon"
@@ -120,6 +150,23 @@ export function Header() {
                 </Link>
               );
             })}
+
+            {/* Admin: HR menu in mobile nav */}
+            {isAdmin && (
+              <Link
+                href="/hr"
+                onClick={() => setSheetOpen(false)}
+                className={cn(
+                  'flex items-center gap-3 rounded-md px-3 py-2 text-sm font-medium transition-colors',
+                  pathname.startsWith('/hr')
+                    ? 'bg-primary/10 text-primary'
+                    : 'text-muted-foreground hover:bg-accent hover:text-accent-foreground'
+                )}
+              >
+                <Users className="h-4 w-4" />
+                <span>인사정보</span>
+              </Link>
+            )}
 
             {/* Master-only: Admin menu in mobile nav */}
             {isMaster && (

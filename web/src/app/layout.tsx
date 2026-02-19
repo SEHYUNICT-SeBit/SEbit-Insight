@@ -16,9 +16,22 @@ const queryClient = new QueryClient({
   },
 });
 
+// 다크모드 초기화 (페이지 로드 시 깜빡임 방지)
+const themeInitScript = `
+(function(){
+  var t=localStorage.getItem('sebit-theme');
+  if(t==='dark'||(!t&&window.matchMedia('(prefers-color-scheme:dark)').matches)){
+    document.documentElement.classList.add('dark');
+  }
+})();
+`;
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="ko">
+    <html lang="ko" suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
+      </head>
       <body className="font-sans antialiased">
         <QueryClientProvider client={queryClient}>
           <UserProvider>

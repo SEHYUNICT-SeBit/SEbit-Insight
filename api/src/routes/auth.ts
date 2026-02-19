@@ -129,6 +129,7 @@ route.get('/login', async (c) => {
     authUrl.searchParams.set('response_type', 'code');
     authUrl.searchParams.set('scope', 'openid profile email');
     authUrl.searchParams.set('state', state);
+    authUrl.searchParams.set('prompt', 'login');
 
     return c.redirect(authUrl.toString());
   }
